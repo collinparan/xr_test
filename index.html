@@ -84,14 +84,14 @@
                         const material = new THREE.MeshBasicMaterial({ map: earthTexture });
                         
                         // Adjust the size of the globe
-                        const largerGeometry = new THREE.SphereGeometry(0.2, 128, 128); // Make the globe larger
+                        const largerGeometry = new THREE.SphereGeometry(0.2, 256, 256); // Make the globe larger
 
                         const mesh = new THREE.Mesh(largerGeometry, material);
                         reticle.matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
                         scene.add(mesh);
 
-                        // Adjust the position to be 2 feet (approximately 0.6 meters) above the selected surface
-                        mesh.position.y += 0.6;
+                        // Adjust the position to be 4 feet (approximately 1.2 meters) above the selected surface
+                        mesh.position.y += 1.2;
 
                         currentGlobe = mesh; // Store the new globe
                     }
