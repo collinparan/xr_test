@@ -70,14 +70,27 @@
                 // Create SphereGeometry for the globe
                 const geometry = new THREE.SphereGeometry(0.1, 32, 32);
 
+                let currentGlobe = null; // Variable to store the current globe
+
 				function onSelect() {
 
 					if (reticle.visible) {
-                    // Use the loaded texture for the material
-                    const material = new THREE.MeshBasicMaterial({ map: earthTexture });
-                    const mesh = new THREE.Mesh(geometry, material);
-                    reticle.matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
-                    scene.add(mesh);
+                        // Remove the existing globe if it exists
+                        if (currentGlobe) {
+                            scene.remove(currentGlobe);
+                        }
+
+                        // Use the loaded texture for the material
+                        const material = new THREE.MeshBasicMaterial({ map: earthTexture });
+                        
+                        // Adjust the size of the globe
+                        const largerGeometry = new THREE.SphereGeometry(0.2, 32, 32); // Make the globe larger
+
+                        const mesh = new THREE.Mesh(largerGeometry, material);
+                        reticle.matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
+                        scene.add(mesh);
+
+                        currentGlobe = mesh; // Store the new globe
                     }
 
 				}
